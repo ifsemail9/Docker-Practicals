@@ -16,6 +16,7 @@ RUN apt-get install -y apache2 \
 EXPOSE 80
 
 RUN echo "This Server is READY!!!" > /var/www/html/index.html \
+    && echo "PHP INFO - info.php" >> /var/www/html/index.html \
     && echo "<?php phpinfo(); ?>" > /var/www/html/info.php
 
 CMD apachectl -D FOREGROUND

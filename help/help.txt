@@ -120,6 +120,42 @@ $ docker run --rm -itd -p 8080:80 --name mywebserver 0a01cd5acac2
 
 
 
+Docker - Compose
+===================
+
+Install Docker Compose -
+root@docker-test:~# apt  install docker-compose
+
+see https://docs.docker.com/compose/compose-file/
+
+docker-compose up -d
+
+docker-compose ps
+
+docker-compose logs
+
+docker-compose stop
+
+Docker Compose depends_on
+==========================
+
+depends_on is a Docker Compose keyword to set the order in which services must start and stop.
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+  web-app:
+    image: web-app:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
 GIT HELP
 =========
 
