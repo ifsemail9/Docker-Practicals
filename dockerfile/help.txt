@@ -52,7 +52,7 @@ phpmyadmin
 Usage with arbitrary server -
 You can use arbitrary servers by adding the environment variable PMA_ARBITRARY=1 to the startup command:
 
-docker run --name phpmyadmin -d -e PMA_ARBITRARY=1 -p 8080:80 phpmyadmin
+docker run --rm -itd --name phpmyadmin -d -e PMA_ARBITRARY=1 -p 8080:80 phpmyadmin
 docker run --rm -itd --name phpmyadmin -d -e PMA_ARBITRARY=1 -p 9090:80 phpmyadmin
 
 Usage with docker-compose and arbitrary server
