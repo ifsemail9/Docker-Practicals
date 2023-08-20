@@ -1,7 +1,13 @@
-version: '3.7'
+version: '3.3'
 
 services:
+  # web:
+  #   # image: apdapp
+  #   # ports:
+  #   #   - "8000:80"
+
   web:
-    image: apdapp
+    image: apdwebapp
+    build: ../dockerfile/webapp/
     ports:
-      - "8000:80"
+      - "8080:80"
