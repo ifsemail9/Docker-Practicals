@@ -9,5 +9,19 @@ services:
   web:
     image: apdwebapp
     build: ../dockerfile/webapp/
+    restart: always
     ports:
       - "8080:80"
+  
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      - PMA_ARBITRARY=1
