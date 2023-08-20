@@ -1,3 +1,6 @@
+Apache
+=======
+
 image - 
 php:7.2-apache
 
@@ -15,6 +18,89 @@ Check -
 root@docker-test:/home/apd/projects/prac-web-app/html# curl 192.168.1.15:8080
 This is my web server
 
+
+DataBase
+=========
+
+image - 
+mariadb:latest
+
+docker run --detach --name some-mariadb --env MARIADB_USER=example-user --env MARIADB_PASSWORD=my_cool_secret --env MARIADB_ROOT_PASSWORD=my-secret-pw  mariadb:latest
+docker run --rm -itd --name mydb --env MARIADB_USER=test --env MARIADB_PASSWORD=test --env MARIADB_ROOT_PASSWORD=root mariadb:latest
+
+or
+
+$ docker network create some-network 
+$ docker run --detach --network some-network --name some-mariadb --env MARIADB_USER=example-user --env MARIADB_PASSWORD=my_cool_secret --env MARIADB_ROOT_PASSWORD=my-secret-pw  mariadb:latest
+
+Connect to MariaDB from the MySQL/MariaDB command line client -
+$ docker run -it --network some-network --rm mariadb mariadb -hsome-mariadb -uexample-user -p
+
+This image can also be used as a client for non-Docker or remote instances:
+$ docker run -it --rm mariadb mariadb -h <server container IP> -u example-user -p
+
+The log is available through Docker's container log:
+$ docker logs some-mariadb
+
+
+PHPMYADMIN
+=========
+
+image - 
+phpmyadmin
+
+Usage with arbitrary server -
+You can use arbitrary servers by adding the environment variable PMA_ARBITRARY=1 to the startup command:
+
+docker run --name phpmyadmin -d -e PMA_ARBITRARY=1 -p 8080:80 phpmyadmin
+docker run --rm -itd --name phpmyadmin -d -e PMA_ARBITRARY=1 -p 9090:80 phpmyadmin
+
+Usage with docker-compose and arbitrary server
+
+Example docker-compose.yml
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: notSecureChangeMe
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+
+Get the DB server IP -
+
+root@docker-test:/home/apd/projects/prac-web-app/html# docker inspect mydb
+
+"NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "dbfd94ccea8a659b5d77583513ab4d5df887f535c1c058a4c74adaf1bcbeb38b",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "3306/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/dbfd94ccea8a",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "cf21d51eb4048f6ad307b0b3e9754d5c96fd6fc094939018585ee3d4e229d1f0",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.3", <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ****************
+
+
+
+GIT HELP
+=========
 
 GIT PUSH -
 git push https://github.com/ifsemail9/prac-web-app.git
