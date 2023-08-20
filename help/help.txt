@@ -99,6 +99,27 @@ root@docker-test:/home/apd/projects/prac-web-app/html# docker inspect mydb
 
 
 
+
+
+Image build
+=========
+
+Rename the docker file to  -
+'Dockerfile'
+
+Command -
+docker build -t apd-ubu-apa:v1 .
+
+Testing the image -
+
+$ docker images
+REPOSITORY    TAG          IMAGE ID       CREATED         SIZE
+apd-ubu-apa   v1           0a01cd5acac2   9 seconds ago   229MB
+
+$ docker run --rm -itd -p 8080:80 --name mywebserver 0a01cd5acac2
+
+
+
 GIT HELP
 =========
 
