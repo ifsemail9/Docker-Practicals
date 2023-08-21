@@ -14,12 +14,14 @@ services:
       - "8080:80"
     depends_on:
       - db
+    volumes:
+      - /home/apd/projects/prac-web-app/phpapp/:/var/www/html/phpapp/
   
   db:
     image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: root
-
+  
   phpmyadmin:
     image: phpmyadmin
     restart: always

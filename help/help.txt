@@ -127,14 +127,22 @@ Install Docker Compose -
 root@docker-test:~# apt  install docker-compose
 
 see https://docs.docker.com/compose/compose-file/
+# Build images
+docker-compose build
 
+# Build and start
 docker-compose up -d
 
 docker-compose ps
 
+docker-compose ls
+
 docker-compose logs
 
 docker-compose stop
+
+# Remove all the containers
+docker-compose rm
 
 Docker Compose depends_on
 ==========================
@@ -156,8 +164,87 @@ services:
     depends_on:
       - db
 
+
+GIT HELP
+=========
+Remove unmounted volumes
+# docker volume prune
+
+list volumes
+# docker volume ls
+
+create volume
+# docker volume create phpmount
+
+check configs of vloume
+# docker volume inspect phpmount
+
+Remove volume
+#  docker volume rm phpmount
+
+
 GIT HELP
 =========
 
 GIT PUSH -
 git push https://github.com/ifsemail9/prac-web-app.git
+
+
+
+
+
+
+
+Docker Compose logs
+===================
+
+docker-compose logs <name-of-service>
+for all services
+
+docker-compose logs
+Use the following options from the documentation:
+
+Usage: logs [options] [SERVICE...]
+
+Options:
+
+--no-color Produce monochrome output.
+
+-f, --follow Follow log output.
+
+-t, --timestamps Show timestamps.
+
+--tail="all" Number of lines to show from the end of the logs for each container.
+
+Save the output
+To save the output to a file you add the following to your logs command:
+
+docker-compose logs -f -t >> myDockerCompose.log
+
+Eg -
+
+# docker compose ps
+NAME                          IMAGE               COMMAND                  SERVICE             CREATED             STATUS              PORTS
+docker-compose-db-1           mariadb             "docker-entrypoint.s…"   db                  About an hour ago   Up 13 minutes       3306/tcp
+docker-compose-phpmyadmin-1   phpmyadmin          "/docker-entrypoint.…"   phpmyadmin          About an hour ago   Up 13 minutes       0.0.0.0:8081->80/tcp, :::8081->80/tcp
+docker-compose-web-1          apdwebapp           "/bin/sh -c 'apachec…"   web                 13 minutes ago      Up 13 minutes       0.0.0.0:8080->80/tcp, :::8080->80/tcp
+
+# docker compose logs web -f
+
+
+Docker logs
+===================
+
+You can start Docker compose in detached mode and attach yourself to the logs of all container later. If you're done watching logs you can detach yourself from the logs output without shutting down your services.
+
+Use docker-compose up -d to start all services in detached mode (-d) (you won't see any logs in detached mode)
+Use docker-compose logs -f -t to attach yourself to the logs of all running services, whereas -f means you follow the log output and the -t option gives you timestamps (See Docker reference)
+Use Ctrl + z or Ctrl + c to detach yourself from the log output without shutting down your running containers
+If you're interested in logs of a single container you can use the docker keyword instead:
+
+Use docker logs -t -f <name-of-service>
+
+Save the output
+To save the output to a file you add the following to your logs command:
+
+docker-compose logs -f -t >> myDockerCompose.log

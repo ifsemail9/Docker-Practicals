@@ -19,6 +19,10 @@ RUN echo "This Server is READY!!!" > /var/www/html/index.html \
     && echo "PHP INFO - info.php" >> /var/www/html/index.html \
     && echo "<?php phpinfo(); ?>" > /var/www/html/info.php
 
-COPY ../phpapp/ /var/www/html/
+# COpy the Dir to the image
+RUN mkdir /var/www/html/phpapp
+
+#This is not working - so using volumes
+#ADD /home/apd/projects/prac-web-appphpapp/phpapp/chkdb.php /var/www/html/phpapp/
 
 CMD apachectl -D FOREGROUND
