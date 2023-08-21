@@ -248,3 +248,13 @@ Save the output
 To save the output to a file you add the following to your logs command:
 
 docker-compose logs -f -t >> myDockerCompose.log
+
+
+
+
+portainer
+===========
+
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+
+https://localhost:9443
