@@ -325,6 +325,11 @@ dockercompose_web_1          /bin/sh -c apachectl -D FO ...   Up      0.0.0.0:80
  
 Docker Network
 ===================
+
+
+Help URL :
+https://earthly.dev/blog/docker-networking/
+
 # docker network ls
 NETWORK ID     NAME                     DRIVER    SCOPE
 e9228486a0d3   bridge                   bridge    local
@@ -335,3 +340,57 @@ d928e51e146e   dockercompose_default    bridge    local
 
 # docker network create test
 f8dd3acecc9f55c8677b81cd4a73d5cc615f16e9044f4ffc9b4abfeb9eb11efa
+
+$ docker network inspect bridge                                                       
+[
+    {
+        "Name": "bridge",
+        "Id": "5077a7b25ae67abd46cff0fde160303476c8a9e2e1d52ad01ba2b4bf04acc0e0",
+        "Created": "2021-03-05T03:25:58.232446444Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "7fea140327487b57c3cf31d7502cfaf701e4ea4314621f0c726309e396105885": {
+                "Name": "busybox1",
+                "EndpointID": "05f216032784786c3315e30b3d54d50a25c1efc7d2030dc664716dda38056326",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            },
+            "9e6464e82c4ca647b9fb60a85ca25e71370330982ea497d51c1238d073148f63": {
+                "Name": "busybox2",
+                "EndpointID": "3dcc24e927246c44a2063b5be30b5f5e1787dcd4d53864c6ff2bb3c561519115",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
