@@ -312,7 +312,15 @@ Removing dockercompose_db_1         ... done
  ✔ Container docker-compose-web-1         Removed                                                                                                                                                                                                       0.0s
  ✔ Container docker-compose-portainer-1   Removed  
 
- # docker compose ps
+# docker-compose ps
+           Name                         Command               State                                              Ports
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+dockercompose_db_1           docker-entrypoint.sh mariadbd    Up      3306/tcp
+dockercompose_phpmyadmin_1   /docker-entrypoint.sh apac ...   Up      0.0.0.0:8081->80/tcp,:::8081->80/tcp
+dockercompose_portainer_1    /portainer                       Up      0.0.0.0:8000->8000/tcp,:::8000->8000/tcp, 0.0.0.0:9000->9000/tcp,:::9000->9000/tcp, 9443/tcp
+dockercompose_web_1          /bin/sh -c apachectl -D FO ...   Up      0.0.0.0:8080->80/tcp,:::8080->80/tcp
+
+
 
  
 Docker Network
@@ -324,3 +332,6 @@ e9228486a0d3   bridge                   bridge    local
 d928e51e146e   dockercompose_default    bridge    local
 24a4dace3c9b   host                     host      local
 3e6da7fd2194   none                     null      local
+
+# docker network create test
+f8dd3acecc9f55c8677b81cd4a73d5cc615f16e9044f4ffc9b4abfeb9eb11efa

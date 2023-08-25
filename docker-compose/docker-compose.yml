@@ -16,14 +16,18 @@ services:
       - db
     volumes:
       - /home/apd/projects/prac-web-app/phpapp/:/var/www/html/phpapp/
-
+    networks:
+      - gateway
   
   db:
     image: mariadb
-    restart: always
+    restart:
+      on-failure
     environment:
       MYSQL_ROOT_PASSWORD: root
-
+    networks:
+      - gateway
+      # - gateway-replica
   
   phpmyadmin:
     image: phpmyadmin
@@ -34,7 +38,8 @@ services:
       - db
     environment:
       - PMA_ARBITRARY=1
-
+    networks:
+      - gateway
 
   portainer:
     image: portainer/portainer-ce:latest
@@ -44,5 +49,9 @@ services:
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-
-      
+    networks:
+      - gateway
+     
+networks:
+  gateway: {}
+  # gateway-replica: {}
