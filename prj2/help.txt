@@ -1,0 +1,8 @@
+Connecting to the Database prompt
+==========================
+
+# docker compose exec -it db bash
+
+# mariadb -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
