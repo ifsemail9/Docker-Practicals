@@ -2,6 +2,18 @@ version: '3'
 
 services:
 
+  web:
+    image: apdwebapp
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    volumes:
+      - /home/apd/projects/Docker-Practicals/prj2/webfiles:/var/www/html/test/
+    networks:
+      - mynetwrk
+
   phpmyadmin:
     image: phpmyadmin
     restart: always
@@ -13,6 +25,7 @@ services:
       - PMA_ARBITRARY=1
     networks:
       - mynetwrk
+
   db:
     image: mariadb
     restart:
