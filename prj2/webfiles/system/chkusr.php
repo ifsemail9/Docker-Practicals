@@ -4,6 +4,15 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+// Starting the session, necessary
+// for using session variables
+session_start();
+  
+// Declaring and hoisting the variables
+$username = "";
+$email    = "";
+$_SESSION['success'] = "";
+
 include './db-config/db.php';
 
 // Create connection
@@ -48,24 +57,41 @@ if (!$db) {
                     {
                         echo "<br>";
                         echo "User is there";
+
+                        // Storing username in session variable
+                        $_SESSION['username'] = $username;
+             
+                        // Welcome message
+                        $_SESSION['success'] = "1";
                         
                         // Page on which the user is sent
                         // to after logging in
-                        //header('location: landing.php');
+                        header('location: landing.php');
                     }
                     else
                     {
                             // If the username and password doesn't match
                             //array_push($errors, "Username or password incorrect");
-                            echo "<br><br>FAILLLLLLLLLLLLLLL";      
+                            echo "<br><br>User is not there!!!"; 
+                            
+                            // remove all session variables
+                            session_unset();
+
+                            // destroy the session
+                            session_destroy();
                     }
     }
     else
     {
             // If the username and password doesn't match
             //array_push($errors, "Username or password incorrect");
-            echo "DB Not connected";
+            echo "DB Not connected!!!";
 
+            // remove all session variables
+            session_unset();
+
+            // destroy the session
+            session_destroy();
     }
  }
   

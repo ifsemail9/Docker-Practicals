@@ -8,7 +8,7 @@ echo gethostname();
 <head>
 <title>Student Login Form</title>
 </head>
-<body>
+<body style="text-align:center;">
 <center> <h1> Student Login Form </h1> </center>   		
 <form action="./system/chkusr.php" method="POST">
     <pre>UserName: <input type="text"

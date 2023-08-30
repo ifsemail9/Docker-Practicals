@@ -6,5 +6,4 @@ $servername = "db";
 $username = "test";
 $password = "test";
 $mydb = "test";
-
 ?>
