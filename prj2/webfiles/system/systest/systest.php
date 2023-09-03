@@ -13,12 +13,24 @@
 
 
 <?php
-
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 session_start();
+
+// Print-questions() function
+function print_questions(&$array) {
+  $arrlength=count($array);
+  $y = 1;
+
+  for($x=0;$x<$arrlength;$x++)
+  {
+  echo "Question $y - $array[$x]";
+  echo "<br>";
+  $y++;
+  }
+}
 
 #if (!isset($_SESSION['success']))
 if (isset($_SESSION['success']))
@@ -33,12 +45,18 @@ if (isset($_SESSION['success']))
   $useremail = $_POST['user_email'];
 
   echo "<br>Student logged: $username";
-  echo "<br>Student email: $useremail";
+  echo "<br>Student email: $useremail<br>";
 
   include './random-que.php';
 
-  echo "<br>==========Main Page : $rowcount.==========";
+  echo "<br><br>==========From Random Que Generator page : $rowcount [otal No of Questions].==========<br><br>";
 
+  echo "<br><br>==========Questions.==========<br><br>";
+
+  //var_dump($uniqueNumbers);
+
+  // Passing the questions array to print-questions() function
+  print_questions($uniqueNumbers);
 }
 else
 {

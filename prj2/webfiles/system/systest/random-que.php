@@ -1,12 +1,36 @@
 <?php
 
-#https://stackoverflow.com/questions/5612656/generating-unique-random-numbers-within-a-range
-#https://www.propatel.com/generate-unique-number-php/
-
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+// Function to generate the random numbers
+function generateUniqueRandomNumbers($min, $max, $count) 
+{
+  if ($max - $min + 1 < $count) 
+  {
+      // Not enough unique numbers available in the range
+      return false;
+  }
+
+  $uniqueNumbers = [];
+  while (count($uniqueNumbers) < $count) 
+  {
+      $randomNumber = mt_rand($min, $max); // Generate a random number
+
+      if (!in_array($randomNumber, $uniqueNumbers)) 
+      {
+          // Check if the number is already in the array
+          $uniqueNumbers[] = $randomNumber; // Add it if it's not already there
+      }
+  }
+
+  return $uniqueNumbers;
+}
+
+
+
+// Main code
 include '../db-config/db.php';
 
 // Create connection
@@ -29,76 +53,26 @@ else
     // Free the memory associated with result set
     mysqli_free_result($result);
   }
-
-  $quesarray = array();
-
-  $min = 1;
-  $max = $rowcount;
-  $no_of_ques = 7;
-  $x = 0;
-  $y = 0;
   
+  $min = 1;   // Minimum number
+  //$max = 100; // Maximum number
+  $max = $rowcount;
+  $count = 7; // Number of unique random numbers(Basically No of Questions) to generate
 
-  echo "<br>============Random ques=========<br>";
+  $uniqueNumbers = generateUniqueRandomNumbers($min, $max, $count);
 
-  while($x <= $no_of_ques)
+  if ($uniqueNumbers !== false) 
   {
-
-    $arrary_size = count($quesarray);
-
-    echo "<br> Generate Question Array element X: $x <br>";
-
-    echo "Generate RAND<br>";
-    $queno = rand($min,$max);
-    echo "Selected Question (RAND): $queno <br>";
-
-    if(!empty($quesarray))
-    {
-      echo "Array Status : NOT EMPTY !!! <br>";
-
-      while ($y <= $arrary_size)
-      {
-        echo "Y - $y <br>";
-        $array_element = $quesarray[$y];
-        echo "Question NO : $y - Question Reffernece : $array_element<br>";
-
-        if ($array_element == $queno)
-         {
-
-          echo "Same found ";
-          $queno2 = rand($min,$max);
-          $quesarray[$x] = $queno2;
-          echo "#####################################################<br>";          
-         }
-         else
-         {
-
-          echo "Same not found ... Added as next Question";
-          $quesarray[$x] = $queno;
-          echo "<br>";
-          echo "#####################################################<br>";
-         }
-
-        $y++;
-      }
-
-    }
-    else
-    {
-      echo "Array Status : EMPTY !!! <br>";
-      $quesarray[$x] = $queno;
-      echo "<b>First Question added to ARRAY....</b><br>";
-    }
-
-    $x++;
-
+      // Unique random numbers have been generated
+      //print_r($uniqueNumbers);
+      echo "<br><b>Questions generated!!!</b><br>";
+  } 
+  else 
+  {
+      // Error message for not enough unique numbers in the range
+      echo "Not enough unique numbers available in the specified range.";
   }
-
  
-
-  echo "<br><br><br>Complete Array<br>";
-  echo "--------------<br>";
-  var_dump($quesarray);
   mysqli_close($db);
 }
 ?>
