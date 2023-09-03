@@ -81,6 +81,8 @@ if (!$db) {
                             session_destroy();
 			    
                             mysqli_close($db);
+
+                            header('location: nosession.php');
                     }
     }
     else

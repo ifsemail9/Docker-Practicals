@@ -17,8 +17,10 @@ else
   session_destroy();  
 
   //++$_SESSION['count'];
-  echo "Session not created!!!";
-  $visib = "disabled";
+  //echo "Session not created!!!";
+  //$visib = "disabled";
+
+  header('location: ../../error/nosession.php');
 }
 ?>
 
@@ -38,5 +40,6 @@ else
             </pre>            
             <input type="submit" value="Submit and Start test" <?php echo $visib?> >
         </form>
+        <a href="./logout.php">UserLogOut</a>
     </body>
 </html> 

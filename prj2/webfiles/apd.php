@@ -21,7 +21,6 @@ echo gethostname();
       
     <input type="submit" value="login">
 </form>
-</form>
 </div>
 </body>
 </html> 
