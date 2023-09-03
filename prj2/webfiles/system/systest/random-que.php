@@ -1,6 +1,7 @@
 <?php
 
 #https://stackoverflow.com/questions/5612656/generating-unique-random-numbers-within-a-range
+#https://www.propatel.com/generate-unique-number-php/
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
