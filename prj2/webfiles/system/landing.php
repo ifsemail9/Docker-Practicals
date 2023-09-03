@@ -4,6 +4,7 @@ session_start();
 #if (!isset($_SESSION['success']))
 if (isset($_SESSION['success']))
 {
+  echo "System Admin Details - <br>";  
   echo $_SESSION['username'];
   echo "<br>";
   echo $_SESSION['success'];
@@ -20,7 +21,10 @@ else
   //echo "Session not created!!!";
   //$visib = "disabled";
 
-  header('location: ../../error/nosession.php');
+  echo getcwd(), "\n";
+  echo exec('pwd'), "\n";
+
+  //header('location: ../error/nosession.php');
 }
 ?>
 

@@ -82,7 +82,7 @@ if (!$db) {
 			    
                             mysqli_close($db);
 
-                            header('location: nosession.php');
+                            header('location: ../error/nosession.php');
                     }
     }
     else
