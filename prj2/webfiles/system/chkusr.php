@@ -79,6 +79,8 @@ if (!$db) {
 
                             // destroy the session
                             session_destroy();
+			    
+                            mysqli_close($db);
                     }
     }
     else
@@ -92,6 +94,8 @@ if (!$db) {
 
             // destroy the session
             session_destroy();
+
+            mysqli_close($db);
     }
  }
   
