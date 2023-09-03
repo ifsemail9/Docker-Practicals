@@ -49,9 +49,9 @@ if (isset($_SESSION['success']))
 
   include './random-que.php';
 
-  echo "<br><br>==========From Random Que Generator page : $rowcount [otal No of Questions].==========<br><br>";
+  echo "<br>==========From Random Que Generator page : $rowcount [otal No of Questions].==========<br>";
 
-  echo "<br><br>==========Questions.==========<br><br>";
+  echo "<br>==========Questions.==========<br><br>";
 
   //var_dump($uniqueNumbers);
 
