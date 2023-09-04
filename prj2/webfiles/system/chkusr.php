@@ -19,12 +19,12 @@ include './db-config/db.php';
 $db = mysqli_connect($servername, $username, $password, $mydb);
 
 // Check connection
-if (!$db) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
-  else
-  {
-    echo "Connected successfully";
+// if (!$db) {
+//     die("Connection failed: " . mysqli_connect_error());
+//   }
+//   else
+//   {
+//    echo "Connected successfully";
 
     // User login
     if (isset($_POST['login_user']))
@@ -99,6 +99,6 @@ if (!$db) {
 
             mysqli_close($db);
     }
- }
+// }
   
 ?>

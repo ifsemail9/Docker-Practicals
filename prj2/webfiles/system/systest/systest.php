@@ -6,20 +6,6 @@
 <body style="text-align:center;">
 <center> <h1> Student TEST SYSTEM </h1> </center>  
 
-<form action="./loadexam.php" method="POST">
-    <pre>Exam Ref No: <input type="text"
-        name="exam_ref">
-    </pre>
-            
-    <input type="submit" value="load test">
-</form>
-<br><br>
-<a href="../logout.php">UserLogOut</a>
-<br>
-</body>
-</html> 
-
-
 <?php
 
 ini_set('display_errors', '1');
@@ -38,11 +24,11 @@ function save_exam_data($db, $examRef, $username, $useremail, $saveques)
 {
   $date_test = date("y-m-d"); 
 
-  if (!$db) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
-  else
-  {
+  // if (!$db) {
+  //   die("Connection failed: " . mysqli_connect_error());
+  // }
+  // else
+  // {
     $sql = "INSERT INTO exam (examref, examdate, examstudent, examstudmail, examquelist) VALUES ($examRef, '$date_test', '$username', '$useremail', '$saveques')";
 
     if (mysqli_query($db, $sql)) 
@@ -54,7 +40,7 @@ function save_exam_data($db, $examRef, $username, $useremail, $saveques)
       echo "Error: " . $sql . "<br>" . mysqli_error($db);
     }
 
-  }
+  //}
 }
 
 // Print-questions() function
@@ -123,5 +109,18 @@ else
   header('location: ../../error/nosession.php');
 }
 ?>
+
+<form action="./loadexam.php" method="POST">
+    <pre>Exam Ref No: <input type="text"
+        name="exam_ref">
+    </pre>
+            
+    <input type="submit" value="load-test">
+</form>
+<br><br>
+<a href="../logout.php">UserLogOut</a>
+<br>
+</body>
+</html> 
 
 
