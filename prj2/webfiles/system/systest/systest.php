@@ -6,8 +6,16 @@
 <body style="text-align:center;">
 <center> <h1> Student TEST SYSTEM </h1> </center>  
 
+<form action="./loadexam.php" method="POST">
+    <pre>Exam Ref No: <input type="text"
+        name="exam_ref">
+    </pre>
+            
+    <input type="submit" value="load test">
+</form>
+<br><br>
 <a href="../logout.php">UserLogOut</a>
-
+<br>
 </body>
 </html> 
 
@@ -16,7 +24,12 @@
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
+//Now your PHP compiler will show all errors except 'Notice.'
+//error_reporting (E_ALL ^ E_NOTICE);
+// Show all errors
+//error_reporting(E_ALL);
+
+
 
 session_start();
 
@@ -46,14 +59,17 @@ function save_exam_data($db, $examRef, $username, $useremail, $saveques)
 
 // Print-questions() function
 function print_questions(&$array) {
-  $arrlength=count($array);
-  $y = 1;
+  $arrlength = count($array);
+  //$y = 1;
+
+  // Fis for 'PHP Warning:  Undefined variable $listques in'
+  $listques = "";
 
   for($x=0;$x<$arrlength;$x++)
   {
     //This is appeding the question to string
     $listques .= $array[$x].",";
-    echo $listques."<br>";
+    //echo $listques."<br>";
 
     //echo "Question $y - $array[$x]";
     //echo "<br>";
@@ -83,7 +99,7 @@ if (isset($_SESSION['success']))
 
   echo "<br>==========From Random Que Generator page : $rowcount [otal No of Questions].==========<br>";
 
-  echo "<br>==========Questions.==========<br><br>";
+  //echo "<br>==========Questions.==========<br><br>";
 
   //var_dump($uniqueNumbers);
 
