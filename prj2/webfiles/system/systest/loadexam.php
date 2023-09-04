@@ -86,23 +86,15 @@
                     echo "0 results";
                 }
 
-
-
-
                 $idx++;
             }
-
         } 
         else 
         {
             echo "0 results";
         }
-
     }
 
-    
-    
-    
     echo "-----------------------------------------------";
 
     $exam_ref = $_POST['exam_ref'];
@@ -110,7 +102,6 @@
     echo "<br>Exam Refference Number: " . "$exam_ref";
 
     search_examref($db, $exam_ref);
-
 
 mysqli_close($db);
 
