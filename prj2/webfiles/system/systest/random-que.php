@@ -4,6 +4,18 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+// Function to generate the examid
+function generate_exam_id()
+{
+
+  // Prints the examid using yesr-month-day-hour-minutes-seconds
+  //echo date("ydmhis") . "<br>";
+
+  $examref = date("ymdhis");
+  return $examref;
+
+}
+
 // Function to generate the random numbers
 function generateUniqueRandomNumbers($min, $max, $count) 
 {
@@ -53,6 +65,10 @@ else
     // Free the memory associated with result set
     mysqli_free_result($result);
   }
+
+  // Generate the exam refference number
+  $examRef = generate_exam_id();
+  echo "<br>Exam Refference Number: ". $examRef . "<br>";
   
   $min = 1;   // Minimum number
   //$max = 100; // Maximum number
@@ -72,7 +88,7 @@ else
       // Error message for not enough unique numbers in the range
       echo "Not enough unique numbers available in the specified range.";
   }
- 
-  mysqli_close($db);
+
+  //mysqli_close($db);
 }
 ?>

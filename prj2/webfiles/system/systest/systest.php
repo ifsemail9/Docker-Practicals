@@ -13,11 +13,36 @@
 
 
 <?php
+
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 session_start();
+
+// Function to save the exam data to DB
+function save_exam_data($db, $examRef, $username, $useremail, $saveques)
+{
+  $date_test = date("y-m-d"); 
+
+  if (!$db) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+  else
+  {
+    $sql = "INSERT INTO exam (examref, examdate, examstudent, examstudmail, examquelist) VALUES ($examRef, '$date_test', '$username', '$useremail', '$saveques')";
+
+    if (mysqli_query($db, $sql)) 
+    {
+      echo "New record created successfully";
+    } 
+    else 
+    {
+      echo "Error: " . $sql . "<br>" . mysqli_error($db);
+    }
+
+  }
+}
 
 // Print-questions() function
 function print_questions(&$array) {
@@ -26,10 +51,17 @@ function print_questions(&$array) {
 
   for($x=0;$x<$arrlength;$x++)
   {
-  echo "Question $y - $array[$x]";
-  echo "<br>";
-  $y++;
+    //This is appeding the question to string
+    $listques .= $array[$x].",";
+    echo $listques."<br>";
+
+    //echo "Question $y - $array[$x]";
+    //echo "<br>";
+    //$y++;
   }
+
+  return $listques;
+
 }
 
 #if (!isset($_SESSION['success']))
@@ -56,7 +88,14 @@ if (isset($_SESSION['success']))
   //var_dump($uniqueNumbers);
 
   // Passing the questions array to print-questions() function
-  print_questions($uniqueNumbers);
+  $saveques = print_questions($uniqueNumbers);
+
+  save_exam_data($db, $examRef, $username, $useremail, $saveques);
+
+
+  // Close the DB connection
+  mysqli_close($db);
+
 }
 else
 {
