@@ -76,16 +76,13 @@
                         {
                             echo "0 results";
                         }
-
                     }
-
                     echo "<br>";
                 } 
                 else 
                 {
                     echo "0 results";
                 }
-
                 $idx++;
             }
         } 
